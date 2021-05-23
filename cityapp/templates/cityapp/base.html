@@ -1,0 +1,24 @@
+
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+  <title>City App</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="{% static 'cityapp/css/bootstrap.css' %}">
+  
+</head>
+<body>
+    <div class='container mt-5'>
+        <h2 class="text-center alert alert-success"> Django web application </h2>
+        {% block content%}
+         
+        {% endblock content%}
+
+    </div>
+    <script src="{% static 'cityapp/js/bootstrap.js' %}"> </script>
+    <script src="{% static 'cityapp/js/jquery.js' %}"> </script>
+    <script src="{% static 'cityapp/js/popper.js' %}"> </script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+{% extends 'cityapp/base.html'%}
+{% block content %}
+
+     
+</style> 
+<div class='row'>
+    <div class="col-sm-4"> 
+        <h3 class="text-center alert alert-info"> Add New Data</h3>
+        <form actions="" method='POST'>
+            {% csrf_token%}
+            {{fm.as_p}}
+            <input type='submit' value='Add Data' name='add' class="btn btn-success">
+        </form>
+    </div>
+        <div class="col-sm-8 ">
+            <h3 class="text-center alert alert-info">Show Population Informations</h3class> </h3>
+            {% if forms%}
+                <table class="table table-hover border-none">
+                    <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scpoe="col">Name of city</th>
+                            <th scpoe="col">state name</th>
+                            <th scpoe="col">Total Population</th>
+                            <th scope="col">Actions </th>
+                        </tr>
+    
+                    </thead>
+                    <tbody>
+                        {% for form in forms %}
+                        <tr>
+                            <th scope="row"> {{form.id}}</th>
+                            <td>{{form.name_of_city}}</td>
+                            <td>{{form.state_name}}</td>
+                            <td>{{form.population_total}}</td>
+                            <td> 
+                                <a href = "{% url 'update' form.id %} " class= "btn btn-warning btn-sm d-inline">Edit</a>
+                             
+                                <form action="{% url 'deletedata' form.id %}" method="POST" class="d-inline">
+                                    {%csrf_token%}
+                                    <input type="submit" value="Deletedata" name="Datadeleted" class= "btn btn-danger" >
+                                </form>
+                            </td>
+                        </tr>
+                        
+                        {% endfor %}
+                    </tbody>
+                </table>
+    
+            {% else %}
+                <h4 class="text-center alert alert-warning">No data </h4>
+            {% endif %}
+            <div> 
+                <nav class="d-flex justify-content-center wow fadeIn">       
+            <span>
+                {% if forms.has_previous %}
+                <a href="?page={{forms.previous_page_numbers}} ">Previous</a>
+                {% endif %}
+                <span>{{forms.number}}</span>
+                {% if forms.has_next %}
+                <a href ="?page={{forms.next_page_number}} "> Next</a>
+                {% endif %}
+            </span>
+            </nav>
+            </div>
+        </div>
+
+           
+           
+   
+</div>
+
+{% endblock content %}
